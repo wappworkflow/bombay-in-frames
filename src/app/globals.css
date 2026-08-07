@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --parchment: #f3ecdd;
+  --paper: #faf6ec;
+  --ink: #211c15;
+  --ink-soft: #4a4238;
+  --brass: #b08a4c;
+  --brass-light: #dcb876;
+  --bottle: #263426;
+  --bottle-light: #354a35;
+  --rust: #8a3b2e;
+
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-manrope);
+  --font-mono: var(--font-plex-mono);
+}
+
+@theme inline {
+  --color-parchment: var(--parchment);
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-brass: var(--brass);
+  --color-brass-light: var(--brass-light);
+  --color-bottle: var(--bottle);
+  --color-bottle-light: var(--bottle-light);
+  --color-rust: var(--rust);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--parchment);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--brass);
+  color: var(--paper);
+}
+
+/* Sprocket rail — the recurring filmstrip motif used across the whole site */
+.sprocket-rail {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--ink) 0px,
+    var(--ink) 10px,
+    transparent 10px,
+    transparent 26px
+  );
+  -webkit-mask-image: repeating-linear-gradient(to bottom, black 0 6px, transparent 6px 16px);
+          mask-image: repeating-linear-gradient(to bottom, black 0 6px, transparent 6px 16px);
+}
+
+/* Fine film-grain texture overlay, purely decorative & very subtle */
+.film-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Same noise texture as .film-grain, but positioned locally (e.g. inside the hero) instead of fixed to the viewport */
+.film-grain-local {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.reel-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.vertical-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
